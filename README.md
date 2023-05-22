@@ -16,3 +16,5 @@ this addon has about 10000 line codes now, I implemented the physics engine of c
 It can switch between IK and FK perfectly.
 the ik solver is dynamic.
 
+https://blenderartists.org/t/ghost-ik-virtual-inverse-kinematics-bone-physic-bone-ik-c/1101771
+
