@@ -1,0 +1,621 @@
+﻿
+
+#ifndef _GHOST_IK_
+	#define _GHOST_IK_
+#define _PRAGMA_MG_
+#pragma message(" <<" __FILE__ "  " __TIme__)
+
+// #define __用DLL__
+
+#define __用IKDLL__
+
+// #define __ASSERT__
+#define __ASSERTDLL__
+#define __VECTOR__
+// #define __LIST__
+
+
+#define __跟踪点__
+#define __画画__ 
+#define __凸画__
+#define __凸DJS__
+#define __凸BL__
+#define __凸MESH__
+#define __凸属__
+#define __凸骨__
+
+// #define __凸MESH__
+#define __WIN__
+
+#define __越界__
+// #define __PT_STL__
+
+// #define __ASSERT__
+// #define __PRINT__
+// #define __PT亖__/*★★  在release 会出现( L.empty 二二 0 丶丶 L.size() 二二 0)的现象 */
+// #define __Χ亖__
+// #define __ΧPT__
+
+
+// #define UN_EXBLIB
+// #define __LEAK__
+// #define _PT_LEAK_
+// #define _构造_	1
+
+//------------------------------
+
+// #define __MATH查__
+#define __编译IK__
+// #define __编译物理ik__
+// #define __编译UV__
+#define __编译品__
+
+#define __丅Σ__
+
+
+
+// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//----LIB--------------------------
+
+
+
+// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+// #define 亖物理	ξ点粒布G==_跟踪点_
+// #define IK数学	ξ点粒布G==_跟踪点_
+// #define SELFCOLLIDE	true
+// #define _PRINT_FILE_
+// #undef 仌骨//●●这个升级骨prs
+// #define 仌骨
+// #undef __PRINT__
+
+
+#define FOR骨(func,i子序,iSize)	\
+	for(i子序=0;i子序 ＜ iSize;++i子序)\
+		{跟踪_I(i子序,ξ点粒布G)	\
+		卍PbIk*&ψpbik子=ik条[i子序];\
+		func;\
+		}
+		
+#define FOR骨凵(func,i子序,iSize)	func;
+
+#include<define\DJS_DEF_HEAD.h>
+//----● 就冄全部undef 也会crash--------------------------
+// #undef _画点_
+// #undef _画线_
+// #undef _画乛_
+// #undef _画丷_
+// #undef _画Λ_
+// #undef _画厶_
+// #undef _画厸_
+//====TEST 编译==========================
+#pragma data_seg("GHOST_IK_share")  //空间的开始
+unsigned char ii引用GG=0;
+
+
+#pragma data_seg()	//空间的结束
+#pragma comment(linker,"/section:GHOST_IK_share,rws")	 
+//------------------------------
+#include"ghost_ik.h"
+
+
+
+
+////物理////////////////////////////////////////
+
+// #include"IMDJS_pose_collector\Global_var.h"
+
+//---------------------------------------------
+#include"物理Lib\碰撞\global_var.h"	
+#include"IMDJS_ghost_IK\DLL.h"
+#include"IMDJS_ghost_IK\G.h"
+
+#include"凷.h"
+
+#include"物理\叵phy0.cpp"//for spline ik
+
+#include"ghost_叵.cpp"
+#include"ghost_属性.cpp"
+#include"ghost_数学.cpp"
+
+#include"ghost_2_ik动作.cpp"
+#include"ghost_ik_扭.cpp"//●编译慢
+#include"ghost_一一_ik.cpp"
+
+#include"物理\烘焙.cpp"
+
+#include"凸.h"
+#include"物理Lib\凸.h"
+
+// #include"IMDJS_nodes\UPDATE.cpp"
+// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#ifdef __编译品__
+	#define ii画物G   2 
+	#include"IMDJS_nodes\IMDJS_node卍.h"
+
+	#include "IMDJS_nodes\node\node卍.h"
+	#include "IMDJS_nodes\node\属性.h"
+	#include "IMDJS_nodes\node\罒.h"
+	#include "IMDJS_nodes\node\罒.cpp"
+
+	#include"IMDJS_nodes\状态.cpp"
+	#include"E:\addons3.0\addons\IMDJS_pose_collector\訁.h"
+	#include"IMDJS_nodes\凷_物骨.h"
+	#include"IMDJS_nodes\凷_节.h"
+	#include"IMDJS_nodes\叵.cpp"
+	#include"IMDJS_nodes\数学骨口.cpp"
+	#include"IMDJS_nodes\数学骨1.cpp"
+	
+	#include"IMDJS_nodes\nodePRS.cpp"
+	#include"IMDJS_nodes\node可见.cpp"
+	#include"IMDJS_nodes\shapekey.cpp"
+	
+	#include"IMDJS_nodes\仌时间.cpp"
+	#include"IMDJS_nodes\仌.cpp"
+
+#endif
+
+
+DLL void 凸一一引用ik(){PRINT1db("++ii引用GG",ii引用GG)	--ii引用GG;}
+DLL void 凸十十引用ik(){PRINT1db("++ii引用GG",ii引用GG)	++ii引用GG;}
+DLL int i凸引用数(){return (int)ii引用GG;}
+////////////////////////////////////////////
+EXC int b凸IK骨(Object*oArm,bContext *C,bool b用修正,int ip控)
+	{//ip控 ,0 只按F,1:alt+F ,2:ctrl+F ,-1:传递
+	亖4(亖IK,"『『『 b凸IK骨",oArm,b用修正,ip控,CON_应用);
+	匚ST iSize=ψ骷G->Lψpbik总父.size();
+	DEF卍region(C,卍region,false)	ASSERTs丶Rdb("!!没有激活区域",卍region.self 二二 ψ0,false)	
+	if(ψ骷G 二二 ψ0){ψ骷G=ψ罒List(oArm,L骷G);	ASSERT丶R(ψ骷G 二二 ψ0,false)	}	
+	if(CON_SAF ＜ ip控 丶丶 ip控 ＜ CON_传递)
+		{bΔghost_ik骨twist(oArm,C,ip控);
+		goto GOTO;
+		// return true;
+		}
+
+	if(ip控 二二 CON_应用)
+		{二(？(ψ骷G->ψα骨根)->ψpbik,ψpbikAG);
+		}
+	ASSERT丶R(ψpbikAG 二二 ψ0,false);PRINT2if(亖IK,"",ψpbikAG,(void*)ψpbikAG);
+	ASSERT丶Rdb(C 二二 0 丨丨 oArm 二二 0,false);
+	if(ψpbikAG )
+		{
+		// PRINT_2("■",C->data,ψm巛,d,d);
+		乛画G.艹乛画=线画G.艹线画=丷画G.艹丷画=点画G.艹点画=-1;b有限制ikG=false;
+		// bArmature*arprsp=(bArmature*)oArm->data;//Object*oCube=o罒s("Cube.001",C);
+		
+		PRINT_2if(亖IK,"C->wm.region",卍region.self,C->wm.region,p,p)	
+		画bl． region_2d_to_location_3d(C,卍region,丅深位G,丅鼠nowG,ψ0,ψ0);//丅鼠nowG ■
+		//PRINT1if(亖IK,str--------------------------,in(2,{2,3}));
+		if(骨． bΔ样条骨(ψpbikAG))//丨丨 ip控 二二 -1 
+			{//ip控=0;
+			if(bΔ一一IK(oArm,ψpbikAG,ψ0,ψ骷G,线画G,丷画G,Ж(ψ骷G->fp反向ik),ip控)二二 false)
+				return false;
+			for(auto&样条:ψ骷G->L卍样条)
+				{
+				for(auto&ψpbik:样条.Lψpbik)
+					{Δ丨扭样条1骨丨(ψpbik,ψ骷G->Mψ.ψm,Ж(ψ骷G->bp限制));
+					}
+				}
+			}
+		else
+			{画bl． Δ现鼠屏位G(C,卍region,i2G);
+			if(ip控 二二 CON_SHIFT)
+				{
+				if( type(ψpbikAG )二二 TYPE_TWO子)
+					{
+					if(ψpbikAG->ψ子)
+						Δ踮脚(ψpbikAG->ψ子,ψpbikAG->ψ子->ψ子,i2G[0]-iG,卍region,oArm,ψ骷G,线画G,丷画G);
+					}
+				else if( type(ψpbikAG )二二 TYPE_TWO孙)
+					{bΔone_IK骨(ψpbikAG,ψ骷G,线画G,丷画G,丅鼠nowG ．f3,丅鼠preG ．f3,ψ0,ψ0,false,false);
+					}
+				}
+			else if(ip控 二二 CON_SX)
+				{
+				if(ψpbikAG->ψ子)
+					Δ踮脚(ψpbikAG->ψ子,ψpbikAG->ψ子->ψ子,i2G[0]-iG,卍region,oArm,ψ骷G,线画G,丷画G,1);
+				}
+			else if(ip控 二二 CON_CF)
+				{
+				if(ψpbikAG->ψ子)
+					Δ踮脚(ψpbikAG->ψ子,ψpbikAG->ψ子->ψ子,i2G[0]-iG,卍region,oArm,ψ骷G,线画G,丷画G,2);
+				}
+			else if(type(ψpbikAG)!= TYPE_无)
+				{
+				if(bΔtwo_IK骨(oArm,ψpbikAG,ψ骷G,线画G,丷画G,丅鼠nowG ．f3,丅鼠preG ．f3,ψ0,ψ0,false,Ж(ψ骷G->fp反向ik)) 二二 false)
+					return false;
+				}
+			}PRINT2if(亖IK,"regionG->winx",iG,i2G[0])	
+
+		//------------------------------ 
+		F3_F3(丅鼠nowG,丅鼠preG)	iG=i2G[0];
+		//------------------------------
+		// PRINT2("",ψ骷G->Lψpbik总父,(void*)ψ骷G)	
+		ASSERTs丶Rdb("",ψ骷G->Lψpbik总父.empty(),false)	
+		for(int i=0;i ＜ iSize;++i)
+			{卍PbIk ψ匚 ψpbik总父=ψ骷G->Lψpbik总父[i];
+			ψpbik总父->PB_pc﹫(ψ骷G->Mψ,false);
+			}
+		// PRINT3("◆",*ψ骷G->bp播放了动画,ψ骷G->Mψ.ψm,ψ骷G->ψm巛)	
+		// if(？Ж有(ψ骷G->bp用修正) 二二 false)
+			{
+			// if(ψ骷G->bp播放了动画 二二 ψ0 丨丨 ψ骷G->bp播放了动画 丶丶 *ψ骷G->bp播放了动画 二二 false)
+				{刷新窗口 //★★这个在2.8渲染时会 crash
+				// 画丷．(丅鼠nowG,0,绿);
+				}
+			}
+		//----画--------------------------
+		// if(ψpbikAG->ψ子)
+			// 画丷．(ψpbikAG->Falseψ子->Head,6,白);
+		二Ж有(false,ψ骷G->bp播放了动画);//PRINT1("",ψ骷G->bp有修正骨)	
+		//====骨修正==========================
+		GOTO: //goto到标签中间，不能有初始化的动作
+		if(？Ж有(ψ骷G->bp有修正骨) 丶丶 修正骨G.hDLL)
+			{修正骨G.Δ骨驱动L(ψ骷G->self,b用修正,false  点线乛丷Λ参G);修正骨G.Δ骨驱动R(ψ骷G->self ,b用修正,false 点线乛丷Λ参G);
+			}
+
+		亖0(亖IK," 』』 b凸IK骨  return true;")	
+
+		return true;
+		}//if(ψpbikAG )
+		
+
+	亖0(亖IK," 』』 b凸IK骨  return false;")	
+
+	return false;
+	}
+
+//====IK.L骷G ●,品.ψα骨根乚,ψpbik乚 ■==========================
+#ifdef __编译品__
+	DLL CB bΔ凷ψpbik(bContext ψ匚 C,map<bNodeTree*,vector<卍Node*>>&MntLψno始__)
+		{亖凷=亖IK=true;
+	// #ifdef _PRINT_HEAD节点_
+		亖1(亖IK,"『『『bΔ凷ψpbik",MntLψno始__.size())	//PRINT_1("1",&MntLψno始__,p)	//
+	// #endif
+		// if(罒Map(nodetree,MntMn：no全G,ΨMntMn：no全G) 二二 false \
+			// 丨丨	 MntMn列表Lo列表物G.empty()	丨丨	 nodetree 二二 ψ0)
+			// {PRINT1if(亖IK,"!!! return",nodetree)	return;}
+		PTlist亖亖(L骷G)	PTmap亖亖(MntLψno始__)	
+		//----仌这个品的Lprsp值--------------------------
+		// else
+		ASSERTptexedb(PRINT1db("★",MntLψno始__.size()),MntLψno始__.empty(),return false;,false)	
+		int i,j,k,ξ脊,i样;卍Node*ψno此骨=ψ0,*ψno前骨=ψ0;
+		vector<卍Node*>&Lψno始_=MntLψno始__.begin()->second;PTlist亖亖(Lψno始_)	
+		ASSERTptexedb(PRINT1db("★",Lψno始_),Lψno始_.empty(),return false;,false)	
+		
+		ψno此骨=ψno罒后1(Lψno始_[0],C,"POSE");
+		PRINT4if(亖IK,"&ψno此骨 1",ψno此骨,ψno此骨->品骨.L肢prs,(void*)&ψno此骨->品骨.L肢prs,(void*)&ψno此骨->品骨,品骨.L肢prs)	
+		
+		//------------------------------
+		卍PbIk*ψpbik_;卍骷*ψ骷_;卍α骨*ψα骨=ψ0;
+		for(auto&it:MntLψno始__)
+		//FOR(MntLψno始__,iSize,i)
+			{//map<bNode*,卍Node>&Mn：no全_=it.second;
+			vector<卍Node*>&Lψno始_=it.second;
+			匚ST iSize=Lψno始_.size();
+			for(i=0;i ＜ iSize;++i)
+				{卍Node ψ匚 ψno始=Lψno始_[i];Object ψ匚 oArm=ψno始->品骨.oArm;PRINT1if(亖IK,"品骨",ψno始->品骨)	
+				if(罒List(oArm,L骷G,ψ骷_))
+					{二(ψ骷_,ψno始->品骨.ψ骷乚);//PRINT2if(亖IK,"十十ψ骷乚",ψno始,ψ骷_)	
+					if(ψno始->品骨.ψ骷乚)
+						{卍贝兹点PRS *ψprsp根=ψ0;卍一α一*ψ一α一断=ψ0;
+						//----脊--------------------------
+						while(ψno此骨)
+							{卍品骨&品骨=ψno此骨->品骨;
+							匚ST ii脊=品骨.L脊序贝兹点.size();ψprsp根=ψ0;ψ一α一断=ψ0;
+							for(j=0;j ＜ ii脊;++j)
+								{卍贝兹点PRS&prspΠ=品骨.L脊序贝兹点[j];//PRINT3if(亖IK,"prspΠ脊",prspΠ.self->name,prspΠ.ψ脊乚,ψ骷_->L卍样条.size())	
+								if(prspΠ.ψ脊乚 二二 ψ0)
+									{匚ST iSize样=ψ骷_->L卍样条.size();
+									for(i样=0;i样 ＜ iSize样;++i样)
+										{卍一α一&一α一=ψ骷_->L卍样条[i样];//PTlist亖亖if(亖IK,一α一.L卍α骨)	
+										if(ψ一α一断 二二 ψ0 丶丶 一α一.ψ断)
+											ψ一α一断=一α一.ψ断;
+										if(罒List(prspΠ,一α一.L卍α骨,ψα骨))
+											{//PRINT3if(亖IK,"b头",prspΠ.b头 ,ψα骨->b头 ,prspΠ.self->name,ψα骨 )	
+											// if(prspΠ.ip头尾 二二 ？(ψα骨->ψpbik)->ip头尾 )
+											if(prspΠ.b头 二二 ψα骨->b头 )
+												{prspΠ.ψ脊乚=ψα骨;
+												if(ψprsp根 二二 ψ0 丶丶 ψα骨 二二 ψno始->品骨.ψ骷乚->ψα骨根)
+													{
+													ψprsp根=&prspΠ;
+													}
+												// PRINT2if(亖IK,"十十ψ脊乚",ψno此骨,prspΠ.ψ脊乚,prspΠ.ip头尾)	
+												break;
+												}
+											}
+										}
+									}
+								}//for(j=0;j ＜ ii脊;++j)
+							//---------------------------------------------
+							if(ψ一α一断 丶丶 ψprsp根)
+								{ψprsp根->ψ断乚=&ψ一α一断->L卍α骨[0];PRINT3("十十ψ断",ψno此骨,ψprsp根->ψ脊乚,ψprsp根->ψ断乚)	
+								}	
+							//----IK--------------------------
+							匚ST ii肢=品骨.L肢prs.size();//PRINT5if(亖IK,"str--------------------------",(void*)&品骨.L肢prs,(void*)&品骨,品骨.L肢prs,ii脊,ii肢)	
+							for(j=0;j ＜ ii肢;++j)
+								{卍肢PRS&肢prs=品骨.L肢prs[j];匚ST jSize=肢prs.isize;//PRINT1("",肢prs)	
+								for(k=0;k ＜ jSize;++k)
+									{卍贝兹点PRS&prspΠ=肢prs.prs巜ξ(k);PRINT4if(亖IK,"",j,k,prspΠ.self ,prspΠ.ψpbik乚)	
+									if(prspΠ.self 丶丶 prspΠ.ψpbik乚 二二 ψ0 丨丨 prspΠ.ψpbik乚 丶丶 prspΠ.ψpbik乚->self!=prspΠ.self)
+										{
+										if(罒ListS(prspΠ.self->name,ψ骷_->Qψpbik,ψpbik_))//脊
+											{prspΠ.ψpbik乚=ψpbik_;//PRINT1("",prspΠ.ψpbik乚)	
+											}
+										}
+									}
+								}
+							//------------------------------
+							// ψno前骨=ψno此骨;
+							ψno此骨=ψno罒后1(ψno此骨,C,"POSE");PRINT1if(亖IK,"前骨",ψno此骨)	
+							}
+						}
+					}
+				}
+
+			}
+
+		亖0(亖IK," 』』 bΔ凷ψpbik")	
+
+		return true;
+		}
+
+//========================================
+联 void ΔqΟ_m(匚I ξφ,卍贝兹点PRS&prsp)
+	{
+	ASSERTptexe(PRINT1("ΔqΟ_m",prsp)	,prsp.ψpbik乚 二二 ψ0,return;,true)	
+	匚ψFq q=prsp.Lq弓[ξφ]ˉf3;
+	＠m_(？(prsp.ψpbik乚->ψP)->mPoseΠ,prsp.ψpbik乚->mι编,prsp.ψpbik乚->mPoseΠ);
+	数． qιΟ_m(q,prsp.ψpbik乚->mPoseΠ ．f44);//PRINT3if(亖IK,"ψpbik孙Ο",prsp.ψpbik乚->self,q,prsp.ψpbik乚->mPoseΠ)	
+	二(1,prsp.ψpbik乚->flag);
+	
+	}
+	
+//====卍贝兹点PRS 数据 转移到 ψ骷乚->Ms骨：pbik=============================
+DLL void  ΔIK钉子1节1架(匚I iφ,匚B bpFK,卍骷 ψ匚 ψ骷乚,cvector<卍贝兹点PRS>&L脊序贝兹点 ,vector<卍肢PRS>&L肢prs , 匚B exe骨,匚B exe脊,匚B exe肢  点线乛丷Λ__)//,vector<卍Vector>&L
+	{//ip控 ,0 只按F,1:alt+F ,2:ctrl+F 
+// #ifdef _PRINT_HEAD节点_
+	亖7(亖IK,"『『『 ΔIK钉子1节1架",iφ,bpFK,L肢prs.size(),ψ骷乚,exe骨,exe脊,exe肢)	//PRINT2if(__画画__,"",,Λ画__.LL5Λ画.size(),Λ画__.iSize)	
+// #endif
+// return;
+	int i,j,i_,ξ_=-1,艹=0,艹1=0;//PRINT1if(亖IK,"",pc根)	PT();
+	// PTlist亖亖if(L肢prs.empty()二二 false 丶丶 亖IK,L肢prs)//[0].Lprs
+	// if(罒ListI(oArm,L骷G,ξ_))
+	匚I ξφ=(-1 二二 iφ)? 0  : iφ;	亖画丷=亖画线=亖IK=亖一一=亖骨数=b画G=true;if(线画G.LL2线画.empty())	线画G.Resize(128);
+	if(ψ骷乚)
+		{//卍骷&骷=L骷G[ξ_];PRINT2if(亖IK,"Qψpbik",ψ骷乚->Qψpbik,？Ж有(ψ骷乚->ψ禁脊))	
+		if(exe脊)
+			{//----脊,先prs_pc赋值,再用spline ik重定位--------------------------
+			匚ST ii脊=L脊序贝兹点.size();PRINT2if(亖IK,"",ii脊,L脊序贝兹点)	
+	// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+			if(0 ＜ ii脊 丶丶 ？Ж有(ψ骷乚->ψ禁脊) 二二 false)
+				{//PTlist亖亖if(？二二s("1Hip",L脊序贝兹点[0].self->name)+1,L脊序贝兹点)		
+				//---- prsp脊.ψ脊乚 ■ --------------------------
+				for(j=0;j ＜ ii脊;++j)
+					{匚卍贝兹点PRS prsp脊=L脊序贝兹点[j];//卍贝兹点PRS*ψprsp子Π=prsp脊.ψ子;
+					
+					if(prsp脊.b屏蔽)
+						{PRINT2if(亖IK ,"!! continue b屏蔽 ",prsp脊.b屏蔽,prsp脊.ψ脊乚)	continue;}
+					//二(1,prsp脊.ψ脊乚->flag);continue;//PTlist亖亖if(？二二s("1Hip",prsp脊.ψ脊乚->name),L脊序贝兹点)	
+					ASSERTptexedb(PRINT1db("★ return;",prsp脊),prsp脊.ψ脊乚 二二 ψ0,return;,true)	
+					// PRINT2db("",prsp脊,Ж(？(prsp脊.ψ脊乚->ψpbik)->ψξik))		
+					PRINT2("Lv弓",prsp脊,prsp脊.贝p.Lv弓.size())	
+					F3_F3(prsp脊.贝p.Lv弓[ξφ],prsp脊.ψ脊乚->丅)	//画丷__．(prsp脊.ψ脊乚->丅,j,蓝)		PRINT3("ψ断乚0",j,prsp脊.ψ脊乚,prsp脊.ψ断乚)	
+					if(prsp脊.ψ断乚)
+						{f3_f3(prsp脊.ψ脊乚->丅,prsp脊.ψ断乚->丅);	PRINT3("ψ断乚",j,prsp脊.ψ脊乚->丅,prsp脊.ψ断乚)	//画丷__．(prsp脊.ψ脊乚->丅,j+ii脊,紫)	
+						}
+					PRINT4("ψ脊乚",ii脊,prsp脊.ψ脊乚,prsp脊.ψ脊乚->ψ子,prsp脊.ψ断乚,prsp脊.ψ脊乚->丅)	
+					}
+				//---------------------------------------------
+				卍α骨 ψ匚 ψα骨根乚=ψ骷乚->ψα骨根;卍一α一*ψ卍样条=ψ0;//PRINT1("",ψα骨根乚,？头(ψα骨根乚))	
+				if(ψα骨根乚)
+					{
+					匚ST iSize=ψ骷乚->L卍样条.size();
+					for(i=0;i ＜ iSize;++i)
+						{ψ卍样条=&ψ骷乚->L卍样条[i];//PRINT3if(亖IK,"",ψα骨根乚,ψ卍样条->L卍α骨,罒ψList(ψα骨根乚,ψ卍样条->L卍α骨))	
+						if(罒ψList(ψα骨根乚,ψ卍样条->L卍α骨))
+							{PRINT1("",ψ卍样条->ψ断)	
+							骨． Δ乛丨ik(ψα骨根乚,0.95f,false,false,点画__,线画__,乛画__);//从父亠子
+							if(ψ卍样条->ψ断 )
+								骨． Δ乛丨ik(&ψ卍样条->ψ断->L卍α骨[0],0.95f,false,false,点画__,线画__,乛画__);//从父亠子
+		
+							// PRINT2if(亖IK ,"",i,ψ卍样条->Lψpbik[0])	
+// continue;
+							Δ骨在线段(*ψ卍样条,点画__,乛画__,Λ画__,ψ骷乚->Mψ,false,true,ψ骷乚->ψα骨根  二二 ψα骨根乚);
+							if(ψ卍样条->ψ断 )
+								{Δ骨在线段(*ψ卍样条->ψ断,点画__,乛画__,Λ画__,ψ骷乚->Mψ,false,false,ψ骷乚->ψα骨根  二二 ψα骨根乚);
+								}
+							
+							break;//只拉一条
+							}
+						}
+					//---------------------------------------------
+					for(i=0;i ＜ iSize;++i)
+						{卍一α一 ψ匚 ψ卍样条=&ψ骷乚->L卍样条[i];
+						匚ST jSize=ψ卍样条->L卍α骨.size();
+						for(j=1;j ＜ jSize;++j)
+							{？(ψ卍样条->L卍α骨[j].ψpbik)->PB_pc﹫(ψ骷乚->Mψ,false);
+							if(？二二s("1ChestUp",ψ卍样条->L卍α骨[j].ψpbik->name))
+								{PRINT2("1ChestUp",ξφ,ψ卍样条->L卍α骨[j].ψpbik->Lψpb子,(ψ卍样条->L卍α骨[j].ψpbik->mPoseΠ))	}
+							}
+						
+						}
+					//----2ik-----------------------------------------
+					if(ψ卍样条)
+						{Δ传递2ik(v0D,*ψ卍样条,ψ骷乚,线画__,丷画__,Ж(ψ骷乚->fp反向ik),-1,false,true);
+						if(ψ卍样条->ψ断)
+							Δ传递2ik(v0D,*ψ卍样条->ψ断,ψ骷乚,线画__,丷画__,Ж(ψ骷乚->fp反向ik),-1,false,true);
+						}						
+					}//if(ψα骨根乚)
+
+				}
+			}
+		
+// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		//----IK--------------------------
+		匚ST iiIK=L肢prs.size();bool bFK=false;
+		// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		if(0 ＜ iiIK 丶丶 exe肢)
+			{VECTOR(Head父)	卍PbIk* ψpbik子,*ψpbik孙;
+			//----------------------------------------
+			for(j=0;j ＜ iiIK;++j)
+				{卍肢PRS&肢prs=L肢prs[j];//父级到子级 的2ik
+				匚ST iSize=肢prs.isize;
+				if( 0 ＜ iSize)
+					{//PRINT2if(亖IK,"iiIK肢prs",j,肢prs)	
+					//----爷,必须在spline 后处理--------------------------
+					// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+					/* */
+					卍PbIk*ψpbik爷=ψ0;
+					if(3 ＜ iSize 丶丶 ？Ж有(ψ骷乚->ψ禁脊)二二 false)
+						{卍贝兹点PRS&prsp爷Π=肢prs.prs爷;//顺序:子,孙 ,父,爷
+						bPoseChannel ψ匚 pc爷=prsp爷Π.self;ASSERT丶Rdb(pc爷 二二 ψ0,)	//PRINT3ifdb(亖IK,"",pc爷,prsp爷Π.b屏蔽,prsp爷Π.ψpbik乚)	
+						if(prsp爷Π.b屏蔽)
+							{PRINT2if(亖IK ,"!! b屏蔽 continue",prsp爷Π.b屏蔽,prsp爷Π.self)	continue;}
+						if(pc爷 丶丶 pc爷->parent 丶丶 prsp爷Π.ψpbik乚)//子 丶丶 罒ListS(pc爷->name,ψ骷乚->Qψpbik,i_)
+							{ψpbik爷=prsp爷Π.ψpbik乚;PRINT6ifdb(亖IK,"",j,ξφ,pc爷,prsp爷Π.ψpbik乚,prsp爷Π.q,prsp爷Π.Lq弓)	
+							ΔqΟ_m(ξφ,prsp爷Π);
+							ψpbik爷->m_尾();//ψpbik爷->Tail ■
+							// 冄mι姿(ψpbik爷->ψ子,false);//for  冄  父.丅Π
+
+							// 画丷__．(ψpbik爷->Tail,ψpbik爷->ξik,绿)	
+							// 画丷__．(ψpbik爷->Head,ψpbik爷->ξik,绿)	PRINT4if(亖IK,"ψpbik爷->Head",j,ξφ,pc爷,ψpbik爷->Head)							
+							}
+						else
+							{PRINT1if(亖IK,"!!! pc爷 二二 ψ0",肢prs)	}
+						}
+
+
+					// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+					//----子--------------------------
+					卍贝兹点PRS&prsp子Π=肢prs.prs子;PRINT2if(亖IK,"ψb不ik",prsp子Π.self,？Ж有(prsp子Π.ψb不ik))	
+					if(？Ж有(prsp子Π.ψb不ik))
+						{PRINT1if(亖IK ,"!! continue b屏蔽 ",prsp子Π.ψb不ik)	continue;}
+					bPoseChannel ψ匚 pc=prsp子Π.self;ASSERT丶R(pc 二二 ψ0,)	//PRINT2if(亖IK,"",i超出φ,pc)	
+					bFK=bpFK 丶丶 prsp子Π.b脚 二二 false;// 丨丨 prsp子Π.bIk 二二 false
+					PRINT7if(亖IK,"bFKbpFK",prsp子Π.self,prsp子Π.ψpbik乚,iφ,bFK,bpFK,prsp子Π.b脚,prsp子Π.bIk)	
+					// if(bpFK 丶丶 prsp子Π.b脚 二二 false 丨丨 prsp子Π.bIk 二二 false){PRINT2if(亖IK,"!!不是脚 continue;",prsp子Π.self->name,prsp子Π.bIk)	continue;}
+					// if(罒ListS(pc->name,ψ骷乚->Qψpbik,i_))//子
+					if(prsp子Π.b屏蔽)
+						{PRINT2if(亖IK ,"!! continue b屏蔽 ",prsp子Π.b屏蔽,prsp子Π.self)	continue;}
+					if(prsp子Π.ψpbik乚 二二 ψ0){PRINT2("!! continue prsp子Π.ψpbik乚 ",prsp子Π.ψpbik乚,prsp子Π)	continue;}	
+					else
+						{ψpbik子=prsp子Π.ψpbik乚;//ψ骷乚->Qψpbik[i_];
+						卍PbIk ψ匚 ψpbik父=ψpbik子->ψP;
+						if(ψpbik父 二二 ψ0)
+							{PRINT1if(亖IK ,"!! continue;",ψpbik父)	continue;}
+						if(bFK)
+							{卍贝兹点PRS&prsp父Π=肢prs.prs父;//PRINT3if(亖IK,"",prsp子Π.Lq弓[ξφ],prsp父Π.Lq弓[ξφ],prsp父Π)	
+							ΔqΟ_m(ξφ,prsp父Π);//PRINT1if(亖IK,"",prsp父Π)	
+							ΔqΟ_m(ξφ,prsp子Π);
+							}
+						//----IK--------------------------
+						else
+							{匚ψF p=prsp子Π.贝p.Lv弓[ξφ]ˉf3,Φ=prsp子Π.贝e.Lv弓[ξφ]ˉf3;PRINT3if(亖IK,"pe",ψpbik子->self,p,Φ)			PRINT2if(亖IK,"Lv弓",prsp子Π,prsp子Π.贝p.Lv弓,ψpbik父->ψP)			
+							
+							F3_F3(p,ψpbik子->ψ申Φ)	ˉF3_F3(Φ,ψpbik子->ψ申Φ+3)	
+							＠？_(ψ骷乚->Mψ.ψm,p,ψpbik子->申Π);F3_F3(Φ,ψpbik子->亾.Φ)	
+							if(ψpbik爷)//ψpbik爷 二二 false 丶丶
+								{
+								＠_(ψpbik爷->mPoseΠ,::丅(ψpbik父->mι编),Head父);F3_F3(ψpbik爷->Head,丅G);
+								// F3_F3(ψpbik爷->Tail,Head父)	
+								}
+							else
+								{
+								if(ψpbik父->ψP)
+									{ψpbik父->ψP->pc_PB(ψ骷乚->Mψ.ψm,true);//Pre,因为节点处理后没有 mPoseΠ
+									＠_(ψpbik父->ψP->mPoseΠ,::丅(ψpbik父->mι编),Head父);F3_F3(ψpbik父->ψP->Head,丅G)	
+									}
+								else
+									{F3_F3(ψpbik父->Head,Head父)	}
+								}
+							if(bΔtwo_IK骨(ψ骷乚->self,ψpbik父,ψ骷乚,线画__,丷画__,ψ0,ψ0,Head父 ．f3,ψpbik子->申Π ．f3,false,Ж(ψ骷乚->fp反向ik)) 二二 false)//b巛 	
+								return;
+							}
+						//----孙(子) --------------------------
+						卍贝兹点PRS&prsp孙Π=肢prs.prs孙;//PRINT1if(亖IK,"",prsp孙Π.Lq弓[ξφ])	
+						if(1 ＜ iSize 丶丶 prsp孙Π.self 丶丶 prsp孙Π.ψpbik乚)//子,罒ListS(prsp孙Π.self->name,ψ骷乚->Qψpbik,i_)
+							{ψpbik孙=prsp孙Π.ψpbik乚;//PRINT1if(亖IK,"",ψpbik孙)	//ψ骷乚->Qψpbik[i_];
+							if(bFK)
+								{ΔqΟ_m(ξφ,prsp孙Π);
+								}
+							else
+								{匚ψF p=prsp孙Π.贝p.Lv弓[ξφ]ˉf3,Φ=prsp孙Π.贝e.Lv弓[ξφ]ˉf3;
+								F3_F3(p,ψpbik孙->ψ申Φ)	ˉF3_F3(Φ,ψpbik孙->ψ申Φ+3);
+								＠？_(ψ骷乚->Mψ.ψm,p,ψpbik孙->申Π);F3_F3(Φ,ψpbik孙->亾.Φ)//	PRINT3if(亖IK,"申Π",ψpbik子->申Π ．f3,ψpbik孙->申Π ．f3,type(ψpbik孙))	
+
+								if(type(ψpbik孙) 二二 TYPE_TWO子)
+									{
+									if(ψpbik孙->ψP)
+										{F3_F3(ψpbik孙->ψP->Head,乛1G)	
+										if(bΔtwo_IK骨(ψ骷乚->self,ψpbik孙->ψP,ψ骷乚,线画__,丷画__,ψ0,ψ0,乛1G ．f3,ψpbik孙->申Π ．f3,false,Ж(ψ骷乚->fp反向ik)) 二二 false)//b巛 	
+											return;	
+										}
+									else return;
+									}
+								else if(type(ψpbik孙) 二二 TYPE_TWO孙)
+									{
+									if(bΔone_IK骨(ψpbik孙,ψ骷乚,线画__,丷画__,ψ0,ψ0,ψpbik子->申Π ．f3,ψpbik孙->申Π ．f3,true,true) 二二 false)//b巛 	
+										return;
+									PRINT4if(亖IK,"TYPE_TWO孙",Φ,ψpbik孙->Head,ψpbik孙->Tail,ψpbik孙->Y)	
+									
+				
+									}
+								}//else
+							}
+		
+						//----画--------------------------
+						// #if(0)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+						PRINT5if(亖IK,"艹丷画",ψpbik子->申Π,ψpbik子->ξik,丷画__.艹丷画,亖画丷,b画G)		//PTlist亖亖(丷画__.LL2丷画)	
+						// 画丷__．(Head父,ψpbik父->ξik,蓝)	
+						// 画丷__．(ψpbik子->申Π,ψpbik子->ξik,紫 )	
+						if(ψpbik孙)画丷__．(ψpbik孙->申Π,ψpbik孙->ξik,蓝)	
+						
+						// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+						}
+				}	}
+			
+			//----仌--------------------------
+			if(0 ＜ iiIK)
+				{匚ST kSize=ψ骷乚->Lψpbik总父.size();//PRINT2db("ψ骷乚->Mψ.ψm",ψ骷乚->Mψ.ψm,ψ骷乚->Lψpbik总父)	
+				for(j=0;j ＜ kSize;++j)
+					{卍PbIk ψ匚 ψpbik总父=ψ骷乚->Lψpbik总父[j];//PRINT_1if(亖IK,"",ψpbik总父->flag,d)	
+					ψpbik总父->PB_pc﹫(ψ骷乚->Mψ,false);//只有 flag 1 才刷新
+				}}
+			}
+		// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// PTlist亖亖if(亖IK 丶丶 ψL6v画__,*ψL6v画__)	
+		// PRINT2("",线画__.艹线画,线画G.艹线画)	
+		}//if(ψ骷乚)
+
+    亖0(亖IK," 』』 ΔIK钉子1节1架")	
+	}
+#endif//#ifdef __编译品__
+
+
+//========================================
+// EXC void 三test(I_ iTest_)
+	// {
+	// printf("三test= %d\n",iTest_);
+	// PRINT1("",iTest_)	
+	// }
+// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+EXC void 凸灬dllik()
+	{
+	// 凸灬dll();
+	}
+// #endif>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+////END////END////END////END////END////END////END////END////
+#ifdef _PRAGMA_MG_
+ 	#pragma message(" >>" __FILE__ "  " __TIME__)
+#endif
+#endif

@@ -1,0 +1,50 @@
+[WIP] ghost_IK (virtual IK system that don't need any extra controller)
+
+I develope this IK bone system to controll character armature bones more easyly and more effcient
+It don't need to build any extra controller,just use the bone itself to control.
+though now it's not fully implment the features  that classic IK has.
+but finally it's feature will be more than the classic IK.
+also It has phyiscal IK.
+with the phyiscal IK you can simulate bone like cloth simulation(it use the cloth's algorithm)
+for the character mesh collision,I implement my armature deformer,
+the deformed mesh' vertices match the result of the bild-in armature deformer.
+
+
+
+hotkey:
+F :activate the IK control and move
+ctrl+F/atl+F :contral the IK with option
+If you select a root bone, press SHIFT + F to move the bone as a whole.
+X :twist the pole of IK
+
+MY OTHER ADDONS:
+https://blenderartists.org/u/imdjs/activity/topics
+
+[addon] ghost_IK（智能ik系统,包含物理动力学骨骼） 
+[WIP]Ghost_ik（不需要任何额外控制器的虚拟IK系统）
+这是一个正在开发中的骨骼插件.            
+我开发了这个ik骨骼系统，以便更容易和有效地控制角色的骨骼。        
+设计理念是它不需要增加任何额外的控制器，只需要使用deform骨骼本身来控制。              
+虽然现在它还没有完全实现所有的经典IK的功能。              
+但我的目标是它的功能将不仅仅是经典的IK所能实现的功能,而是有更丰富的功能。
+目前我比较注重动力学这方面的功能开发.
+---------------------------------------------
+现在增加了修正骨骼功能,这个是完全按照真人肌肉的结构来用骨骼权重来模拟肌肉的运动,每块肌肉都用三个可活动的骨骼模拟,可以模拟肌肉的弯曲,拉伸等,这个是很复杂的算法,所以一直在改善中.
+
+我在BlenderArtist上已经发了帖子欢迎讨论:
+https://blenderartists.org/t/ghost-ik-virtual-inverse-kinematics-bone-physic-bone-ik-c/1101771
+网盘:
+(https://www.dropbox.com/sh/6l7a4nso45kf4xm/AACfZczmaMEmj-uVPniugvJ9a?dl=0)
+https://1drv.ms/u/s!AsZIVWqD15n6gXCg5_fxlHQ6Iu-N?e=ExdBQS
+(https://pan.baidu.com/s/1hqmviT2)
+
+现在它有了物理IK。             
+ 选中一个骨骼,热键： F/ctrl+F/atl+F：激活IK控制并移动  ：  x:扭曲ik
+如果选中骨骼是根骨骼,按SHIFT+f 可以整体移动骨骼.
+物理IK部分是完全实时计算的就像你模拟布料一样的使用,使用了C++写的.
+
+视频教程:
+https://youtu.be/9Q7E1ELjFs8
+
+https://youtu.be/yMl7Ka10jnA (全身骨骼)
+https://youtu.be/5fgoV9RdvAg(瑜珈)
